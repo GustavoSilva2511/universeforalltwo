@@ -7,7 +7,7 @@ Decisões: renomear pastas/componentes, Tailwind, React Query, sem TS/lint/teste
 ## Progresso
 - [x] PR1: Tailwind 3.4 + React Query instalados; `tailwind/postcss.config`, `styles/index.css`, alias `@`, `app/queryClient.js`, `constants/config.js`, `.env.example`; `.env` no `.gitignore`; `QueryClientProvider` no `App`.
 - [x] PR2: `views → pages/HomePage + pages/ApodContentPage`; `components → layout/Header,Footer,PageLayout + apod/ApodInfo,ApodPreview + ui/TextInput`; `Routers.jsx → app/routes.jsx` (`createBrowserRouter`) + `constants/routes.js`; props `tittle→title`, `func→onChange`; `ApodPreview` com `alt` + `lazy`; barrels `index.js`.
-- [ ] PR3: `apiClient + apodService + dateValidation + useApod` + navegação `?date=` + remove `localStorage`.
+- [x] PR3: `services/apiClient` + `features/apod/{apodService,dateValidation,useApod}` + `utils/date` + navegação `?date=` + remove `localStorage`/`process.env` do src + guard com redirect + loading/error + suporte a vídeo no `ApodPreview` + `.env` migrado p/ `VITE_NASA_API_KEY`.
 - [ ] PR4: `ApodSearchForm + Button + ErrorMessage` + conversão Tailwind + deleta CSS legados.
 
 ## 1. Diagnóstico
