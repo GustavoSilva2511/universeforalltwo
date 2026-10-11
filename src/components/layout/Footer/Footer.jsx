@@ -1,6 +1,6 @@
-import "./MyFooter.css"
+import "./Footer.css"
 
-export default function MyFooter(props) {
+export default function Footer() {
     return (
         <footer>
             <p>made by Gustavo Silva</p>

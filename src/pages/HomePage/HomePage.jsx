@@ -1,27 +1,27 @@
-import "./PutInfo.css"
+import "./HomePage.css"
 
-import Info from "../../components/info/Info"
-import Input from "../../components/input/Input"
-import MyHeader from "../../components/MyHeader/MyHeader"
-import MyFooter from "../../components/myFooter/MyFooter"
+import ApodInfo from "../../components/apod/ApodInfo"
+import TextInput from "../../components/ui/TextInput"
+import PageLayout from "../../components/layout/PageLayout"
 
-import {useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 import { useState } from "react"
+import { ROUTES } from "../../constants/routes"
 
-export default function PutInfo(props) {
+export default function HomePage() {
     const navigate = useNavigate();
     const [error, setError] = useState("");
 
     function verify(Today, Date) {
         const today = Today.split("-");
         const date = Date.split("-");
-    
+
         if (parseInt(date[0]) < parseInt(today[0])){
             setError("");
             return true;
         }
-        
+
         if ((date[0]) == today[0] && parseInt(date[1]) < parseInt(today[1])){
             setError("");
             return true;
@@ -45,42 +45,37 @@ export default function PutInfo(props) {
         const timeElapsed = Date.now();
         const date = new Date(timeElapsed);
         const today = date.toISOString().split("T");
-        
+
         if(verify(today[0], localStorage.getItem("date"))){
-            const url = "https://api.nasa.gov/planetary/apod?api_key=" + "kdfNSXeGP6S3lB4RxgB05UXhgxNPIR850imFrlDB" + "&date=" + localStorage.getItem("date");
+            const url = "https://api.nasa.gov/planetary/apod?api_key=" + process.env.APOD_TOKEN + "&date=" + localStorage.getItem("date");
             const res = await axios.get(url);
             const data = await res.data;
             localStorage.setItem("title", data.title)
             localStorage.setItem("explanation", data.explanation)
-            localStorage.setItem("url", data.url)  
-            navigate("/content")
+            localStorage.setItem("url", data.url)
+            navigate(ROUTES.CONTENT)
         }
       }
 
     return (
-        <div className="main">
-        <div className="section">
-           <MyHeader tittle="Universe For All" />
-            <Info 
-                tittle="Wellcome people"
-                description="inset a date bellow and appreciate"
-            />
-            <div>
-                <Input 
-                type="date"
-                placeholder="choice a date..."
-                func={(e) => {localStorage.setItem("date", e.target.value)}}
-                />
-                <p className="error">{error}</p>
-                <button onClick={getDate}>continue</button>
+        <PageLayout>
+            <div className="main">
+                <div className="section">
+                    <ApodInfo
+                        title="Wellcome people"
+                        description="inset a date bellow and appreciate"
+                    />
+                    <div>
+                        <TextInput
+                            type="date"
+                            placeholder="choice a date..."
+                            onChange={(e) => {localStorage.setItem("date", e.target.value)}}
+                        />
+                        <p className="error">{error}</p>
+                        <button onClick={getDate}>continue</button>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-
-        
-        
-        
-        <MyFooter/>
-        </div>       
+        </PageLayout>
     )
 }
