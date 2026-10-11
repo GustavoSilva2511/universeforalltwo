@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import HomePage from "../pages/HomePage";
-import ApodContentPage from "../pages/ApodContentPage";
+import HomePage from "../pages/HomePage/index.js";
+import ApodContentPage from "../pages/ApodContentPage/index.js";
 import { ROUTES } from "../constants/routes";
 
 export const router = createBrowserRouter([

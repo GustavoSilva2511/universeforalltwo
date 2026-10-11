@@ -1,14 +1,17 @@
-import "./ApodPreview.css"
+const frameClass =
+    "my-2 w-[90%] max-w-3xl rounded-[20px] border-[3px] border-black shadow-[1px_1px_10px_2px_rgba(255,255,255,0.34)]";
 
 export default function ApodPreview({ src, title, mediaType = "image" }) {
     if (!src) return null;
 
+    const fallbackTitle = title ?? "NASA astronomy picture of the day";
+
     if (mediaType === "video") {
         return (
             <iframe
-                className="preview"
+                className={`${frameClass} aspect-video`}
                 src={src}
-                title={title ?? "NASA astronomy picture of the day"}
+                title={fallbackTitle}
                 allow="encrypted-media"
                 allowFullScreen
             />
@@ -16,6 +19,6 @@ export default function ApodPreview({ src, title, mediaType = "image" }) {
     }
 
     return (
-        <img className="preview" src={src} alt={title ?? "NASA astronomy picture of the day"} loading="lazy" />
+        <img className={frameClass} src={src} alt={fallbackTitle} loading="lazy" />
     )
 }
