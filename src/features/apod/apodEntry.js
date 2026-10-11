@@ -1,28 +1,50 @@
-// Helpers puros (sem dependências) para normalizar a resposta da APOD API.
-//
-// Contexto: durante a migração do backend da NASA (legacy → science.nasa.gov,
-// com arquivamento previsto para 2026-12-01), o endpoint passou a retornar de
-// forma intermitente um placeholder ("NASA Science" + logo) no lugar do
-// conteúdo real — inclusive para datas recentes. Detectamos isso aqui para
-// tratar como erro recuperável em vez de exibir o logo como se fosse a foto.
+import { stripHtml } from "../../utils/html.js";
+
+// Mapeamento da nova API oficial do APOD (apod-basic):
+// GET /apod-basic/{YYMMDD} — ex.: 2026-10-11 vira "261011".
+// Diferenças p/ a API legada: `url` é o permalink do artigo (não a imagem),
+// a imagem full é `hdurl`, `explanation` vem em HTML e vídeos/iframes trazem
+// o embed dentro de `basic_html`.
 
 const PLACEHOLDER_TITLE = "NASA Science";
 const PLACEHOLDER_URL_MARKER = "nasa-logo";
 
+export function toLegacyDateCode(isoDate) {
+  return isoDate.slice(2).replaceAll("-", "");
+}
+
 export function isPlaceholderEntry(data) {
   if (!data) return true;
   const url = data.url ?? "";
-  return url.includes(PLACEHOLDER_URL_MARKER) || data.title === PLACEHOLDER_TITLE;
+  const hdurl = data.hdurl ?? "";
+  return (
+    url.includes(PLACEHOLDER_URL_MARKER) ||
+    hdurl.includes(PLACEHOLDER_URL_MARKER) ||
+    data.title === PLACEHOLDER_TITLE
+  );
+}
+
+function extractIframeSrc(basicHtml) {
+  const match = /<iframe[^>]+src="([^"]+)"/i.exec(basicHtml ?? "");
+  if (!match) return "";
+  const src = match[1];
+  return src.startsWith("//") ? `https:${src}` : src;
 }
 
 export function normalizeApodEntry(data, fallbackDate) {
   const mediaType = data.media_type ?? "image";
+  const isVideoLike = mediaType === "video" || mediaType === "iframe";
+
+  const url = isVideoLike
+    ? extractIframeSrc(data.basic_html) || data.hdurl || ""
+    : data.hdurl || "";
+
   return {
     title: data.title ?? "",
-    explanation: data.explanation ?? "",
-    // Para imagens, hdurl tem resolução maior; vídeos usam url (embed).
-    url: mediaType === "image" ? (data.hdurl || data.url || "") : (data.url ?? ""),
-    mediaType,
+    explanation: stripHtml(data.explanation),
+    url,
+    mediaType: isVideoLike ? "video" : "image",
+    alt: data.alt || data.title || "NASA astronomy picture of the day",
     date: data.date ?? fallbackDate,
   };
 }

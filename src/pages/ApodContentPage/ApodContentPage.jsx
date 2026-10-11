@@ -48,7 +48,7 @@ function ApodContent({ date }) {
 
     return (
         <PageLayout>
-            <ApodPreview src={data.url} title={data.title} mediaType={data.mediaType} />
+            <ApodPreview src={data.url} title={data.title} alt={data.alt} mediaType={data.mediaType} />
             <ApodInfo
                 title={data.title}
                 description={data.explanation}

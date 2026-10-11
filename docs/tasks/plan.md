@@ -59,6 +59,20 @@ um placeholder (`title: "NASA Science"` + logo) no lugar do conteúdo real.
 - [ ] `/content` sem `?date=` → volta para `/`
 - [ ] APOD com vídeo → iframe, sem quebrar
 
+## Task 7 — Migrar p/ nova API apod-basic [concluída]
+
+Doc oficial: `https://api.nasa.gov/assets/files/apod/APOD-APIs-and-RSS-info.pdf`.
+A API legada será arquivada em 2026-12-01. Descobertas: rota single-date
+`/apod-basic/{YYMMDD}` (ex.: `261011`), `per_page` cap 25, filtros de data só
+na listagem; `url` = permalink (não a imagem); `hdurl` = imagem full;
+`explanation` em HTML; vídeo/iframe com embed em `basic_html`; sem `api_key`.
+
+- [x] `config.js` → `APOD_BASIC_BASE_URL`; `apiClient` na nova base; `.env.example` sem chave (endpoint público)
+- [x] `apodService`: `GET /apod-basic/{YYMMDD}` (via `toLegacyDateCode`), sem chave, 404 com mensagem por data
+- [x] `apodEntry`: imagem → `hdurl`; vídeo/iframe → `src` do `<iframe>` em `basic_html`; `explanation` via `stripHtml` (`utils/html.js`); `alt` real; placeholder mantido como rede de segurança
+- [x] `ApodPreview` com prop `alt`; `ApodContentPage` repassa `data.alt`
+- [x] 7/7 checks (YYMMDD, strip HTML/entities, hdurl, vídeo, placeholder); `npm run build` passa; zero refs à API legada no `src`
+
 ## Backlog — fora de escopo
 
 - [ ] TypeScript

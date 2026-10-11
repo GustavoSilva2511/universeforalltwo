@@ -1,6 +1,4 @@
-// Centraliza acesso à chave da NASA.
-// No Vite, apenas variáveis prefixadas com VITE_ são expostas ao client.
-// Renomeie APOD_TOKEN no .env para VITE_NASA_API_KEY (ver .env.example).
-export const NASA_API_KEY = import.meta.env.VITE_NASA_API_KEY ?? "";
-
-export const NASA_APOD_BASE_URL = "https://api.nasa.gov/planetary/apod";
+// Nova API oficial do APOD (a legada api.nasa.gov/planetary/apod será
+// arquivada em 2026-12-01). Doc: https://api.nasa.gov/assets/files/apod/APOD-APIs-and-RSS-info.pdf
+// O endpoint é público e não exige api_key.
+export const APOD_BASIC_BASE_URL = "https://science.nasa.gov/wp-json/wp/v2";
