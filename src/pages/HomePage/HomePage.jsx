@@ -14,13 +14,16 @@ export default function HomePage() {
 
     return (
         <PageLayout>
-            <div className="mt-24 flex w-full max-w-md flex-col items-center">
-                <ApodInfo
-                    title="Wellcome people"
-                    description="inset a date bellow and appreciate"
-                />
-                <ApodSearchForm onSubmit={handleSubmit} />
-            </div>
+            <section className="flex flex-1 items-center justify-center py-12 sm:py-20">
+                <div className="flex w-full max-w-xl flex-col items-center text-center">
+                    <ApodInfo
+                        align="center"
+                        title="Welcome, stargazer"
+                        description="Pick a date below and explore NASA's astronomy picture of the day, one universe at a time."
+                    />
+                    <ApodSearchForm onSubmit={handleSubmit} />
+                </div>
+            </section>
         </PageLayout>
     )
 }

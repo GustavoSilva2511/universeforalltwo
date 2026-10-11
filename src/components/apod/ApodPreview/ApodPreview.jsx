@@ -1,6 +1,3 @@
-const frameClass =
-    "my-2 w-[90%] max-w-3xl rounded-[20px] border-[3px] border-black shadow-[1px_1px_10px_2px_rgba(255,255,255,0.34)]";
-
 export default function ApodPreview({ src, title, alt, mediaType = "image" }) {
     if (!src) return null;
 
@@ -9,17 +6,24 @@ export default function ApodPreview({ src, title, alt, mediaType = "image" }) {
 
     if (mediaType === "video") {
         return (
-            <iframe
-                className={`${frameClass} aspect-video`}
-                src={src}
-                title={fallbackTitle}
-                allow="encrypted-media"
-                allowFullScreen
-            />
+            <div className="animate-apod-in w-full overflow-hidden rounded-xl shadow-2xl shadow-black/50 ring-1 ring-white/10 sm:rounded-2xl">
+                <iframe
+                    className="aspect-video w-full"
+                    src={src}
+                    title={fallbackTitle}
+                    allow="encrypted-media"
+                    allowFullScreen
+                />
+            </div>
         );
     }
 
     return (
-        <img className={frameClass} src={src} alt={altText} loading="lazy" />
+        <img
+            className="animate-apod-in max-h-[75vh] w-full rounded-xl object-contain shadow-2xl shadow-black/50 ring-1 ring-white/10 sm:rounded-2xl"
+            src={src}
+            alt={altText}
+            loading="lazy"
+        />
     )
 }

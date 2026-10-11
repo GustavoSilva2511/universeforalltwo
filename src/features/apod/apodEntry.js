@@ -45,6 +45,7 @@ export function normalizeApodEntry(data, fallbackDate) {
     url,
     mediaType: isVideoLike ? "video" : "image",
     alt: data.alt || data.title || "NASA astronomy picture of the day",
+    credit: data.credit || data.copyright || "",
     date: data.date ?? fallbackDate,
   };
 }

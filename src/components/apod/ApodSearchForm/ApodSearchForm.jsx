@@ -19,15 +19,27 @@ export default function ApodSearchForm({ onSubmit }) {
     };
 
     return (
-        <div className="flex flex-col items-center">
-            <TextInput
-                type="date"
-                placeholder="choice a date..."
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-            />
+        <form
+            className="mt-6 flex w-full flex-col gap-3"
+            onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+            }}
+        >
+            <div className="flex w-full flex-col gap-3 sm:flex-row">
+                <div className="flex-1">
+                    <TextInput
+                        type="date"
+                        label="Picture date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                    />
+                </div>
+                <div className="flex items-end">
+                    <Button type="submit">View picture</Button>
+                </div>
+            </div>
             <ErrorMessage message={error} />
-            <Button onClick={handleSubmit}>continue</Button>
-        </div>
+        </form>
     );
 }

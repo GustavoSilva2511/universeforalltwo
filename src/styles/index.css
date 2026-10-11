@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-abyss font-sans text-slate-100 antialiased;
+  }
+
+  ::selection {
+    background-color: theme("colors.nebula");
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme("colors.nebula");
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  @keyframes apod-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-apod-in {
+    animation: apod-fade-in 0.6s ease-out both;
+  }
+}

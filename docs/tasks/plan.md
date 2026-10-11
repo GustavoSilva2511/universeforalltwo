@@ -73,6 +73,21 @@ na listagem; `url` = permalink (não a imagem); `hdurl` = imagem full;
 - [x] `ApodPreview` com prop `alt`; `ApodContentPage` repassa `data.alt`
 - [x] 7/7 checks (YYMMDD, strip HTML/entities, hdurl, vídeo, placeholder); `npm run build` passa; zero refs à API legada no `src`
 
+## Task 8 — Redesign responsivo [concluída]
+
+Direção: foto como hero; mesma base de cor; Space Grotesk; mobile-first; motion
+único (fade da imagem, respeita `prefers-reduced-motion`).
+
+- [x] `index.html`: Space Grotesk, `theme-color`, meta description
+- [x] Theme: `nebulaDeep` (botão, contraste ~8.6:1), `starlight`, `font-sans`; base: `color-scheme: dark`, `::selection`, `:focus-visible`
+- [x] `Header` (wordmark + Allianz à direita, borda sutil) / `Footer` (empilha no mobile) / `PageLayout` (`max-w-5xl`)
+- [x] `Button` / `TextInput` (label visível + `htmlFor`, dark) / `ErrorMessage` (`role=alert`, altura fixa anti-shift)
+- [x] `ApodSearchForm`: form real (submit por Enter), inline no desktop, empilhado no mobile
+- [x] `Home`: hero centralizado; copy sem typo ("Welcome, stargazer")
+- [x] `Content`: data formatada + título + hero + `credit` + texto em `max-w-prose`; skeleton no loading; erro centralizado com retry
+- [x] `normalizeApodEntry` inclui `credit`; `toDisplayDate()` em `utils/date.js`
+- [x] `npm run build` passa; bundle contém as novas classes; screenshots por Playwright bloqueados (sem `libnspr4`, sem sudo) — validação visual pendente no navegador (Task 6)
+
 ## Backlog — fora de escopo
 
 - [ ] TypeScript
