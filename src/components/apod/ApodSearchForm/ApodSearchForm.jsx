@@ -35,7 +35,7 @@ export default function ApodSearchForm({ onSubmit }) {
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
-                <div className="flex items-end">
+                <div className="flex items-end justify-center sm:justify-start">
                     <Button type="submit">View picture</Button>
                 </div>
             </div>
