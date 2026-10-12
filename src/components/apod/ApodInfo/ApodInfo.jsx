@@ -1,4 +1,4 @@
-export default function ApodInfo({ title, description, eyebrow, credit, align = "left" }) {
+export default function ApodInfo({ title, description, eyebrow, credit, creditUrl, align = "left" }) {
     const alignment = align === "center" ? "text-center" : "text-left";
 
     return (
@@ -13,7 +13,21 @@ export default function ApodInfo({ title, description, eyebrow, credit, align = 
                 {description}
             </p>
             {credit ? (
-                <p className="mt-3 text-xs text-slate-500">Credit: {credit}</p>
+                <p className="mt-3 text-xs text-slate-500">
+                    Credit:{" "}
+                    {creditUrl ? (
+                        <a
+                            href={creditUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="underline decoration-nebula underline-offset-2 transition hover:text-slate-300"
+                        >
+                            {credit}
+                        </a>
+                    ) : (
+                        credit
+                    )}
+                </p>
             ) : null}
         </div>
     )

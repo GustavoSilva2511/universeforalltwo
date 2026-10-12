@@ -21,14 +21,18 @@ export default function ApodContentPage() {
 
 function ApodSkeleton() {
     return (
-        <div className="flex w-full flex-col gap-4 py-8" aria-busy="true" aria-label="Loading picture">
-            <div className="h-4 w-32 animate-pulse rounded bg-white/10" />
-            <div className="h-9 w-3/4 animate-pulse rounded-lg bg-white/10 sm:h-11" />
-            <div className="aspect-video w-full animate-pulse rounded-xl bg-white/10 sm:rounded-2xl" />
-            <div className="flex flex-col gap-2">
-                <div className="h-4 w-full animate-pulse rounded bg-white/10" />
-                <div className="h-4 w-full animate-pulse rounded bg-white/10" />
-                <div className="h-4 w-2/3 animate-pulse rounded bg-white/10" />
+        <div className="flex w-full flex-col gap-4 py-8 sm:py-12 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10" aria-busy="true" aria-label="Loading picture">
+            <div className="order-1 lg:order-2">
+                <div className="aspect-video w-full animate-pulse rounded-xl bg-white/10 sm:rounded-2xl" />
+            </div>
+            <div className="order-2 lg:order-1">
+                <div className="h-4 w-32 animate-pulse rounded bg-white/10" />
+                <div className="mt-3 h-9 w-3/4 animate-pulse rounded-lg bg-white/10 sm:h-11" />
+                <div className="mt-4 flex flex-col gap-2">
+                    <div className="h-4 w-full animate-pulse rounded bg-white/10" />
+                    <div className="h-4 w-full animate-pulse rounded bg-white/10" />
+                    <div className="h-4 w-2/3 animate-pulse rounded bg-white/10" />
+                </div>
             </div>
         </div>
     );
@@ -68,14 +72,27 @@ function ApodContent({ date }) {
 
     return (
         <PageLayout>
-            <article className="flex w-full flex-col gap-5 py-8 sm:py-12">
-                <ApodPreview src={data.url} title={data.title} alt={data.alt} mediaType={data.mediaType} />
-                <ApodInfo
-                    eyebrow={toDisplayDate(data.date)}
-                    title={data.title}
-                    description={data.explanation}
-                    credit={data.credit}
-                />
+            <article className="flex w-full flex-col gap-5 py-8 sm:py-12 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10">
+                <div className="order-1 min-w-0 lg:order-2">
+                    <ApodPreview src={data.url} title={data.title} alt={data.alt} mediaType={data.mediaType} />
+                </div>
+                <div className="order-2 min-w-0 lg:order-1">
+                    <ApodInfo
+                        eyebrow={toDisplayDate(data.date)}
+                        title={data.title}
+                        description={data.explanation}
+                        credit={data.credit}
+                        creditUrl={data.creditUrl}
+                    />
+                    <div className="mt-6">
+                        <Link
+                            to={ROUTES.HOME}
+                            className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-2.5 font-semibold text-slate-200 transition hover:border-nebula hover:text-white active:scale-95"
+                        >
+                            <span aria-hidden="true">←</span> Search another date
+                        </Link>
+                    </div>
+                </div>
             </article>
         </PageLayout>
     )

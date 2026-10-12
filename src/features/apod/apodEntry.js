@@ -1,4 +1,4 @@
-import { stripHtml } from "../../utils/html.js";
+import { parseCredit, stripHtml } from "../../utils/html.js";
 
 // Mapeamento da nova API oficial do APOD (apod-basic):
 // GET /apod-basic/{YYMMDD} — ex.: 2026-10-11 vira "261011".
@@ -39,13 +39,16 @@ export function normalizeApodEntry(data, fallbackDate) {
     ? extractIframeSrc(data.basic_html) || data.hdurl || ""
     : data.hdurl || "";
 
+  const { text: credit, url: creditUrl } = parseCredit(data.credit || data.copyright || "");
+
   return {
     title: data.title ?? "",
     explanation: stripHtml(data.explanation),
     url,
     mediaType: isVideoLike ? "video" : "image",
     alt: data.alt || data.title || "NASA astronomy picture of the day",
-    credit: data.credit || data.copyright || "",
+    credit,
+    creditUrl,
     date: data.date ?? fallbackDate,
   };
 }
