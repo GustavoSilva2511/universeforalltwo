@@ -3,13 +3,15 @@ import TextInput from "../../ui/TextInput/index.js";
 import Button from "../../ui/Button/index.js";
 import ErrorMessage from "../../ui/ErrorMessage/index.js";
 import { isValidApodDate } from "../../../features/apod/index.js";
+import { useLocale } from "../../../features/locale/index.js";
 
 export default function ApodSearchForm({ onSubmit }) {
+    const { t } = useLocale();
     const [date, setDate] = useState("");
     const [error, setError] = useState("");
 
     const handleSubmit = () => {
-        const { valid, error: validationError } = isValidApodDate(date);
+        const { valid, error: validationError } = isValidApodDate(date, t("validation.invalidDate"));
         if (!valid) {
             setError(validationError);
             return;
@@ -30,13 +32,13 @@ export default function ApodSearchForm({ onSubmit }) {
                 <div className="flex-1">
                     <TextInput
                         type="date"
-                        label="Picture date"
+                        label={t("search.label")}
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                     />
                 </div>
                 <div className="flex items-end justify-center sm:justify-start">
-                    <Button type="submit">View picture</Button>
+                    <Button type="submit">{t("search.submit")}</Button>
                 </div>
             </div>
             <ErrorMessage message={error} />

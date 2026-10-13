@@ -4,9 +4,11 @@ import PageLayout from "../../components/layout/PageLayout/index.js"
 
 import { useNavigate } from "react-router-dom"
 import { ROUTES } from "../../constants/routes"
+import { useLocale } from "../../features/locale/index.js"
 
 export default function HomePage() {
     const navigate = useNavigate();
+    const { t } = useLocale();
 
     const handleSubmit = (date) => {
         navigate(`${ROUTES.CONTENT}?date=${date}`);
@@ -18,8 +20,8 @@ export default function HomePage() {
                 <div className="flex w-full max-w-xl flex-col items-center text-center">
                     <ApodInfo
                         align="center"
-                        title="Welcome, stargazer"
-                        description="Pick a date below and explore NASA's astronomy picture of the day, one universe at a time."
+                        title={t("home.title")}
+                        description={t("home.description")}
                     />
                     <ApodSearchForm onSubmit={handleSubmit} />
                 </div>

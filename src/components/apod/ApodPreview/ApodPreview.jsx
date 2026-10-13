@@ -1,11 +1,13 @@
 import { useState } from "react";
 import ApodLightbox from "../ApodLightbox/index.js";
+import { useLocale } from "../../../features/locale/index.js";
 
 export default function ApodPreview({ src, title, alt, mediaType = "image" }) {
+    const { t } = useLocale();
     const [isFullscreen, setIsFullscreen] = useState(false);
     if (!src) return null;
 
-    const fallbackTitle = title ?? "NASA astronomy picture of the day";
+    const fallbackTitle = title ?? t("preview.fallbackTitle");
     const altText = alt || fallbackTitle;
 
     if (mediaType === "video") {
@@ -27,8 +29,8 @@ export default function ApodPreview({ src, title, alt, mediaType = "image" }) {
             <button
                 type="button"
                 onClick={() => setIsFullscreen(true)}
-                aria-label="Open fullscreen viewer"
-                title="Open fullscreen viewer"
+                aria-label={t("lightbox.openViewer")}
+                title={t("lightbox.openViewer")}
                 className="block w-full cursor-zoom-in rounded-xl focus-visible:outline-none sm:rounded-2xl"
             >
                 <img

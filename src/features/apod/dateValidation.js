@@ -10,15 +10,17 @@ function isRealCalendarDate(dateStr) {
   return dt.getUTCFullYear() === year && dt.getUTCMonth() === month - 1 && dt.getUTCDate() === day;
 }
 
-export function isValidApodDate(dateStr) {
+export function isValidApodDate(dateStr, invalidMessage) {
+  const fallback = "Date not exist, please, put a valid date!";
+  const errorMessage = invalidMessage ?? fallback;
   if (!dateStr || !ISO_DATE_REGEX.test(dateStr) || !isRealCalendarDate(dateStr)) {
-    return { valid: false, error: "Date not exist, please, put a valid date!" };
+    return { valid: false, error: errorMessage };
   }
 
   const today = todayISO();
 
   if (dateStr > today || dateStr < APOD_MIN_DATE_ISO) {
-    return { valid: false, error: "Date not exist, please, put a valid date!" };
+    return { valid: false, error: errorMessage };
   }
 
   return { valid: true, error: "" };

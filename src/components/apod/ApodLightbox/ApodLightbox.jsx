@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useLocale } from "../../../features/locale/index.js";
 
 const MIN_SCALE = 1;
 const MAX_SCALE = 4;
@@ -10,6 +11,7 @@ function clampScale(value) {
 }
 
 export default function ApodLightbox({ src, title, alt, onClose }) {
+    const { t } = useLocale();
     const [scale, setScale] = useState(1);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
@@ -89,14 +91,14 @@ export default function ApodLightbox({ src, title, alt, onClose }) {
 
     const endDrag = () => setIsDragging(false);
 
-    const altText = alt || title || "NASA astronomy picture of the day";
+    const altText = alt || title || t("lightbox.fallbackAlt");
 
     return (
         <div
             className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-sm"
             role="dialog"
             aria-modal="true"
-            aria-label={title ? `Fullscreen viewer: ${title}` : "Fullscreen viewer"}
+            aria-label={title ? t("lightbox.viewerWithTitle", { title }) : t("lightbox.viewer")}
             onClick={(event) => {
                 if (event.target === event.currentTarget) onClose?.();
             }}
@@ -113,7 +115,7 @@ export default function ApodLightbox({ src, title, alt, onClose }) {
                     ref={closeRef}
                     type="button"
                     onClick={onClose}
-                    aria-label="Close fullscreen viewer"
+                    aria-label={t("lightbox.close")}
                     className="rounded-lg border border-white/15 px-3 py-1.5 text-lg font-semibold leading-none text-slate-200 transition hover:border-nebula hover:text-white active:scale-95"
                 >
                     ×
@@ -151,7 +153,7 @@ export default function ApodLightbox({ src, title, alt, onClose }) {
                     type="button"
                     onClick={zoomOut}
                     disabled={scale <= MIN_SCALE}
-                    aria-label="Zoom out"
+                    aria-label={t("lightbox.zoomOut")}
                     className="rounded-lg border border-white/15 px-4 py-2 font-semibold text-slate-200 transition hover:border-nebula hover:text-white active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                     −
@@ -159,16 +161,16 @@ export default function ApodLightbox({ src, title, alt, onClose }) {
                 <button
                     type="button"
                     onClick={reset}
-                    aria-label="Reset zoom"
+                    aria-label={t("lightbox.reset")}
                     className="rounded-lg border border-white/15 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-nebula hover:text-white active:scale-95"
                 >
-                    Reset
+                    {t("lightbox.reset")}
                 </button>
                 <button
                     type="button"
                     onClick={zoomIn}
                     disabled={scale >= MAX_SCALE}
-                    aria-label="Zoom in"
+                    aria-label={t("lightbox.zoomIn")}
                     className="rounded-lg border border-white/15 px-4 py-2 font-semibold text-slate-200 transition hover:border-nebula hover:text-white active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                     +

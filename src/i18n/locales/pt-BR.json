@@ -1,0 +1,60 @@
+{
+  "header": {
+    "subtitle": "Foto do dia da NASA",
+    "languageLabel": "Trocar idioma"
+  },
+  "home": {
+    "title": "Bem-vindo, observador das estrelas",
+    "description": "Escolha uma data abaixo e explore a foto do dia da NASA, um universo de cada vez."
+  },
+  "search": {
+    "label": "Data da foto",
+    "submit": "Ver foto"
+  },
+  "content": {
+    "back": "Buscar outra data",
+    "errorTitle": "Algo deu errado",
+    "retry": "Tentar novamente",
+    "retrying": "Tentando novamente...",
+    "chooseAnother": "Escolher outra data",
+    "loading": "Carregando foto",
+    "translatedBadge": "Traduzido automaticamente",
+    "showOriginal": "Ver original",
+    "showTranslation": "Ver tradução",
+    "translationLoading": "Traduzindo explicação…",
+    "translationUnavailable": "Tradução indisponível, mostrando original em inglês."
+  },
+  "info": {
+    "credit": "Crédito:"
+  },
+  "lightbox": {
+    "viewer": "Visualizador em tela cheia",
+    "viewerWithTitle": "Visualizador em tela cheia: {title}",
+    "close": "Fechar visualizador em tela cheia",
+    "zoomIn": "Aproximar",
+    "zoomOut": "Afastar",
+    "reset": "Redefinir",
+    "openViewer": "Abrir visualizador em tela cheia",
+    "fallbackAlt": "Foto do dia da NASA"
+  },
+  "preview": {
+    "fallbackTitle": "Foto do dia da NASA"
+  },
+  "footer": {
+    "madeBy": "Feito por Gustavo Silva",
+    "courtesy": "Imagens e textos cortesia do NASA APOD"
+  },
+  "validation": {
+    "invalidDate": "Data não existe, por favor, coloque uma data válida!"
+  },
+  "errors": {
+    "notFound": "A NASA não tem APOD para {date}. Escolha outra data.",
+    "noImage": "A NASA não tem imagem para esta data no momento. Tente de novo ou escolha outra data.",
+    "timeout": "A requisição expirou, tente novamente.",
+    "generic": "Não foi possível carregar o conteúdo, tente novamente mais tarde."
+  },
+  "meta": {
+    "title": "Universe For All",
+    "description": "Universe For All — explore a foto do dia da NASA."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "header": {
+    "subtitle": "NASA picture of the day",
+    "languageLabel": "Change language"
+  },
+  "home": {
+    "title": "Welcome, stargazer",
+    "description": "Pick a date below and explore NASA's astronomy picture of the day, one universe at a time."
+  },
+  "search": {
+    "label": "Picture date",
+    "submit": "View picture"
+  },
+  "content": {
+    "back": "Search another date",
+    "errorTitle": "Something went wrong",
+    "retry": "Try again",
+    "retrying": "Trying again...",
+    "chooseAnother": "Choose another date",
+    "loading": "Loading picture",
+    "translatedBadge": "Automatically translated",
+    "showOriginal": "View original",
+    "showTranslation": "View translation",
+    "translationLoading": "Translating explanation…",
+    "translationUnavailable": "Translation unavailable, showing original in English."
+  },
+  "info": {
+    "credit": "Credit:"
+  },
+  "lightbox": {
+    "viewer": "Fullscreen viewer",
+    "viewerWithTitle": "Fullscreen viewer: {title}",
+    "close": "Close fullscreen viewer",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "reset": "Reset",
+    "openViewer": "Open fullscreen viewer",
+    "fallbackAlt": "NASA astronomy picture of the day"
+  },
+  "preview": {
+    "fallbackTitle": "NASA astronomy picture of the day"
+  },
+  "footer": {
+    "madeBy": "Made by Gustavo Silva",
+    "courtesy": "Imagery and text courtesy of NASA APOD"
+  },
+  "validation": {
+    "invalidDate": "Date not exist, please, put a valid date!"
+  },
+  "errors": {
+    "notFound": "NASA has no APOD for {date}. Choose another date.",
+    "noImage": "NASA has no image for this date right now. Try again or choose another date.",
+    "timeout": "Request timed out, please try again.",
+    "generic": "Could not load the content, please try again later."
+  },
+  "meta": {
+    "title": "Universe For All",
+    "description": "Universe For All — explore NASA's astronomy picture of the day."
+  }
+}

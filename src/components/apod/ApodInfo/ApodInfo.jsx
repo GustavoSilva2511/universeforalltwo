@@ -1,4 +1,7 @@
+import { useLocale } from "../../../features/locale/index.js";
+
 export default function ApodInfo({ title, description, eyebrow, credit, creditUrl, align = "left" }) {
+    const { t } = useLocale();
     const alignment = align === "center" ? "text-center" : "text-left";
 
     return (
@@ -14,7 +17,7 @@ export default function ApodInfo({ title, description, eyebrow, credit, creditUr
             </p>
             {credit ? (
                 <p className="mt-3 text-xs text-slate-500">
-                    Credit:{" "}
+                    {t("info.credit")}{" "}
                     {creditUrl ? (
                         <a
                             href={creditUrl}
